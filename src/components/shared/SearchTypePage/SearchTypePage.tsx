@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 "use client";
 
-import { useMemo, useState, useCallback } from "react";
+import { useMemo, useState } from "react";
 import { PropertyUI } from "@/domain/types/PropertyUI.types";
 import PropertyCardGrid from "@/components/shared/PropertyCardGridSearch/PropertyCardGridSearch";
 
@@ -26,7 +26,7 @@ export default function SearchTypePage({ properties, filterParam }: Props) {
   const [provinceSelected, setProvinceSelected] = useState("");
   const [citySelected, setCitySelected] = useState("");
 
-  // 1. Opciones de filtros
+  // 1. Opciones de filtros (Lógica se mantiene igual)
   const provinceOptions = useMemo(() => {
     const map = new Map();
     properties.forEach(p => {
@@ -72,7 +72,6 @@ export default function SearchTypePage({ properties, filterParam }: Props) {
     });
   }, [properties, typesSelected, minPrice, maxPrice, currency, minM2, maxM2, bedrooms, garage, provinceSelected, citySelected]);
 
-  // 3. Título dinámico
   const getTitle = () => {
     const titles: Record<string, string> = {
       venta: "Propiedades en Venta",
@@ -95,19 +94,19 @@ export default function SearchTypePage({ properties, filterParam }: Props) {
   };
 
   return (
-    <main className="min-h-screen bg-[#F8F9FA] pb-20 pt-24 lg:pt-48">
+    <main className="min-h-screen bg-light-bg pb-20 pt-24 lg:pt-56">
       <div className="max-w-7xl mx-auto px-4">
         
         {/* HEADER SECCIÓN */}
         <div className="mb-12">
-          <h1 className="font-montserrat text-4xl md:text-6xl font-black uppercase tracking-tighter text-oxford italic leading-none">
+          <h1 className="font-montserrat text-deep mb-4">
             {getTitle()}
           </h1>
           <div className="flex items-center gap-4 mt-6">
-            <div className="bg-gold-sand text-black px-4 py-1 rounded text-xs font-black uppercase italic shadow-sm">
+            <div className="bg-emerald text-white px-4 py-1 rounded text-xs font-bold uppercase tracking-wider">
               {filtered.length} Resultados
             </div>
-            <div className="h-px bg-black/10 flex-1" />
+            <div className="h-px bg-deep/10 flex-1" />
           </div>
         </div>
 
@@ -116,40 +115,40 @@ export default function SearchTypePage({ properties, filterParam }: Props) {
           {/* BOTÓN FILTRAR (SOLO MOBILE) */}
           <button
             onClick={() => setShowFilters(true)}
-            className="lg:hidden w-full bg-oxford text-white py-4 rounded-xl font-montserrat font-black uppercase tracking-widest text-sm shadow-xl border-b-4 border-gold-sand"
+            className="lg:hidden w-full bg-deep text-white py-4 rounded-xl font-montserrat font-bold uppercase tracking-widest text-sm shadow-xl transition-all active:scale-[0.98]"
           >
-            Mostrar Filtros
+            Filtrar Resultados
           </button>
 
           {/* SIDEBAR DE FILTROS */}
           <aside className={`
-            ${showFilters ? "fixed inset-0 z-50 bg-oxford p-6 overflow-y-auto" : "hidden"} 
+            ${showFilters ? "fixed inset-0 z-60 bg-deep p-6 overflow-y-auto" : "hidden"} 
             lg:relative lg:block lg:inset-auto lg:z-0 lg:bg-transparent lg:p-0 lg:w-80 shrink-0
           `}>
-            <div className="bg-oxford p-8 rounded-[2rem] shadow-2xl border border-white/5 text-white">
+            <div className="bg-deep p-8 rounded-3xl shadow-2xl border border-white/5 text-white">
               
-              <div className="flex justify-between items-center mb-8 lg:mb-10">
-                <h2 className="font-montserrat text-xl font-black uppercase tracking-tight border-l-4 border-gold-sand pl-4 italic">
-                  Busqueda Fina
+              <div className="flex justify-between items-center mb-10">
+                <h2 className="font-montserrat text-lg font-bold uppercase tracking-tight border-l-4 border-emerald pl-4">
+                  Búsqueda Avanzada
                 </h2>
-                <button onClick={() => setShowFilters(false)} className="lg:hidden text-gold-sand font-bold text-xs uppercase">
+                <button onClick={() => setShowFilters(false)} className="lg:hidden text-coral font-bold text-xs uppercase">
                   Cerrar ✕
                 </button>
               </div>
 
               <div className="space-y-7">
 
-                {/* CATEGORÍA (Tipo de Propiedad) */}
+                {/* CATEGORÍA */}
                 <div className="space-y-3">
-                  <label className="text-gold-secondary block uppercase text-[10px] tracking-[0.2em] font-black">Categoría</label>
+                  <label className="text-soft-gray block uppercase text-[10px] tracking-widest font-bold">Categoría</label>
                   <div className="flex flex-wrap gap-2">
                     {propertyTypes.map(([slug, name]) => (
                       <button
                         key={slug}
                         onClick={() => toggleType(slug)}
-                        className={`px-3 py-2 rounded-md font-bold text-[10px] uppercase transition-all border ${
+                        className={`px-3 py-2 rounded-lg font-bold text-[10px] uppercase transition-all border ${
                           typesSelected.includes(slug) 
-                            ? "bg-gold-sand text-black border-gold-sand shadow-lg" 
+                            ? "bg-emerald text-white border-emerald shadow-lg shadow-emerald/20" 
                             : "bg-white/5 text-white border-white/10 hover:bg-white/10"
                         }`}
                       >
@@ -161,46 +160,46 @@ export default function SearchTypePage({ properties, filterParam }: Props) {
                 
                 {/* UBICACIÓN */}
                 <div className="space-y-3">
-                  <label className="text-gold-secondary block uppercase text-[10px] tracking-[0.2em] font-black">Ubicación</label>
+                  <label className="text-soft-gray block uppercase text-[10px] tracking-widest font-bold">Ubicación</label>
                   <select 
                     value={provinceSelected}
                     onChange={(e) => { setProvinceSelected(e.target.value); setCitySelected(""); }}
-                    className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-sm focus:border-gold-sand outline-none text-white cursor-pointer"
+                    className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-sm focus:border-emerald outline-none text-white cursor-pointer"
                   >
-                    <option value="" className="bg-oxford">Todas las Provincias</option>
+                    <option value="" className="bg-deep">Provincias (Todas)</option>
                     {provinceOptions.map(([slug, name]) => (
-                      <option key={slug} value={slug} className="bg-oxford">{name}</option>
+                      <option key={slug} value={slug} className="bg-deep">{name}</option>
                     ))}
                   </select>
 
                   <select 
                     value={citySelected}
                     onChange={(e) => setCitySelected(e.target.value)}
-                    className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-sm focus:border-gold-sand outline-none text-white cursor-pointer disabled:opacity-30"
+                    className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-sm focus:border-emerald outline-none text-white cursor-pointer disabled:opacity-30"
                     disabled={!provinceSelected}
                   >
-                    <option value="" className="bg-oxford">Todas las Localidades</option>
+                    <option value="" className="bg-deep">Ciudades (Todas)</option>
                     {cityOptions.map(([slug, name]) => (
-                      <option key={slug} value={slug} className="bg-oxford">{name}</option>
+                      <option key={slug} value={slug} className="bg-deep">{name}</option>
                     ))}
                   </select>
                 </div>
 
                 {/* SUPERFICIE */}
                 <div className="space-y-3">
-                  <label className="text-gold-secondary block uppercase text-[10px] tracking-[0.2em] font-black">Superficie Total (m²)</label>
+                  <label className="text-soft-gray block uppercase text-[10px] tracking-widest font-bold">Superficie (m²)</label>
                   <div className="grid grid-cols-2 gap-3">
                     <input
                       type="number"
                       placeholder="Min"
-                      className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-sm focus:border-gold-sand outline-none text-white placeholder:text-white/20"
+                      className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-sm focus:border-emerald outline-none text-white placeholder:text-white/20"
                       value={minM2}
                       onChange={(e) => setMinM2(e.target.value ? Number(e.target.value) : "")}
                     />
                     <input
                       type="number"
                       placeholder="Max"
-                      className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-sm focus:border-gold-sand outline-none text-white placeholder:text-white/20"
+                      className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-sm focus:border-emerald outline-none text-white placeholder:text-white/20"
                       value={maxM2}
                       onChange={(e) => setMaxM2(e.target.value ? Number(e.target.value) : "")}
                     />
@@ -209,14 +208,14 @@ export default function SearchTypePage({ properties, filterParam }: Props) {
 
                 {/* PRECIO Y MONEDA */}
                 <div className="space-y-3">
-                  <label className="text-gold-secondary block uppercase text-[10px] tracking-[0.2em] font-black">Presupuesto</label>
+                  <label className="text-soft-gray block uppercase text-[10px] tracking-widest font-bold">Presupuesto</label>
                   <div className="flex gap-2 mb-3">
                     {["USD", "ARS"].map((c) => (
                       <button
                         key={c}
                         onClick={() => setCurrency(currency === c ? "" : c)}
-                        className={`flex-1 py-2 rounded-md font-bold text-[10px] transition-all border ${
-                          currency === c ? "bg-gold-sand text-black border-gold-sand" : "bg-white/5 text-white border-white/10"
+                        className={`flex-1 py-2 rounded-lg font-bold text-[10px] transition-all border ${
+                          currency === c ? "bg-emerald text-white border-emerald" : "bg-white/5 text-white border-white/10"
                         }`}
                       >
                         {c}
@@ -227,29 +226,29 @@ export default function SearchTypePage({ properties, filterParam }: Props) {
                     <input
                       type="number"
                       placeholder="Mín"
-                      className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-sm focus:border-gold-sand outline-none text-white placeholder:text-white/20"
+                      className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-sm focus:border-emerald outline-none text-white placeholder:text-white/20"
                       value={minPrice}
                       onChange={(e) => setMinPrice(e.target.value ? Number(e.target.value) : "")}
                     />
                     <input
                       type="number"
                       placeholder="Máx"
-                      className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-sm focus:border-gold-sand outline-none text-white placeholder:text-white/20"
+                      className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-sm focus:border-emerald outline-none text-white placeholder:text-white/20"
                       value={maxPrice}
                       onChange={(e) => setMaxPrice(e.target.value ? Number(e.target.value) : "")}
                     />
                   </div>
                 </div>
 
-                {/* AMENITIES */}
-                <div className="pt-4 space-y-4">
+                {/* COCHERA */}
+                <div className="pt-4">
                   <button
                     onClick={() => setGarage(!garage)}
                     className={`w-full flex justify-between items-center p-4 rounded-xl border transition-all ${
-                      garage ? "bg-gold-sand/20 border-gold-sand text-gold-sand shadow-[0_0_15px_rgba(212,175,55,0.1)]" : "bg-white/5 border-white/10 text-white"
+                      garage ? "bg-emerald/10 border-emerald text-emerald" : "bg-white/5 border-white/10 text-white"
                     }`}
                   >
-                    <span className="text-[10px] font-black uppercase tracking-widest">Cochera</span>
+                    <span className="text-[10px] font-bold uppercase tracking-widest">Cochera</span>
                     <span className="text-xs font-bold">{garage ? "SÍ" : "NO"}</span>
                   </button>
                 </div>
@@ -258,13 +257,13 @@ export default function SearchTypePage({ properties, filterParam }: Props) {
                 <div className="pt-8 space-y-4 border-t border-white/10">
                   <button
                     onClick={() => setShowFilters(false)}
-                    className="lg:hidden w-full bg-gold-sand text-black py-4 rounded-xl font-montserrat font-black uppercase text-xs shadow-2xl transition-transform active:scale-95"
+                    className="lg:hidden w-full bg-coral text-white py-4 rounded-xl font-montserrat font-bold uppercase text-xs shadow-lg transition-transform active:scale-95"
                   >
                     Aplicar Filtros
                   </button>
                   <button
                     onClick={resetFilters}
-                    className="w-full text-[9px] font-black uppercase tracking-[0.3em] text-white/30 hover:text-gold-sand transition-colors flex justify-center items-center gap-2 py-2"
+                    className="w-full text-[10px] font-bold uppercase tracking-widest text-soft-gray hover:text-coral transition-colors flex justify-center items-center gap-2 py-2"
                   >
                     ✕ Limpiar Búsqueda
                   </button>
@@ -281,11 +280,14 @@ export default function SearchTypePage({ properties, filterParam }: Props) {
                 <PropertyCardGrid properties={filtered} />
               </div>
             ) : (
-              <div className="flex flex-col items-center justify-center py-32 bg-white rounded-[3rem] border border-black/5 shadow-inner">
-                <div className="text-6xl mb-4">🏠</div>
-                <h3 className="font-montserrat text-xl font-black uppercase text-oxford/20 italic">No hay coincidencias</h3>
-                <button onClick={resetFilters} className="mt-4 text-gold-sand font-bold uppercase text-xs tracking-widest border-b border-gold-sand pb-1">
-                  Reintentar
+              <div className="flex flex-col items-center justify-center py-32 bg-white rounded-[2.5rem] border border-deep/5 shadow-sm">
+                <div className="text-5xl mb-6">🔍</div>
+                <h3 className="font-montserrat text-xl font-bold uppercase text-deep/30 italic text-center">No encontramos coincidencias</h3>
+                <button 
+                  onClick={resetFilters} 
+                  className="mt-6 text-emerald font-bold uppercase text-xs tracking-widest border-b-2 border-emerald/20 hover:border-emerald transition-all pb-1"
+                >
+                  Ver todas las propiedades
                 </button>
               </div>
             )}

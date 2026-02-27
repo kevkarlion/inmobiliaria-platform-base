@@ -2,6 +2,7 @@ import React from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight, ShieldCheck, TrendingUp } from "lucide-react";
+import { branding } from "@/utils/branding";
 
 // Definimos la interfaz para evitar el error de TypeScript
 interface ContentProps {
@@ -27,7 +28,7 @@ export default function AboutPreview() {
             <div className="relative h-full w-full rounded-sm overflow-hidden shadow-2xl z-10 lg:border-12 border-white">
               <Image
                 src="/img-about-home.webp"
-                alt="Riquelme Propiedades"
+                alt={branding.companyName}
                 fill
                 priority
                 className="object-cover grayscale-[0.2] lg:group-hover:grayscale-0 transition-all duration-700"

@@ -2,11 +2,12 @@
 
 import { useState } from "react";
 import PropertyCardAdmin from "@/components/shared/PropertyCardAdmin/PropertyCardAdmin";
-import CreatePropertyForm from "@/components/shared/PropertyForm/PropertyForm"; 
+import CreatePropertyForm from "@/components/shared/PropertyForm/PropertyForm";
 import EditPropertyForm from "@/components/shared/EditPropertyForm/EditPropertyForm";
 import { PropertyResponse } from "@/dtos/property/property-response.dto";
 import { LogoutButton } from "@/components/shared/Admin/LogoutBtn";
 import { Building2, Plus, Home } from "lucide-react";
+import { branding } from "@/utils/branding";
 
 export default function PropertiesAdminClient({ initialProperties }: { initialProperties: PropertyResponse[] }) {
   const [properties, setProperties] = useState<PropertyResponse[]>(initialProperties);
@@ -53,7 +54,7 @@ export default function PropertiesAdminClient({ initialProperties }: { initialPr
             </div>
             <div>
               <h1 className="text-xl md:text-2xl font-black text-slate-900 uppercase tracking-tighter italic">
-                Riquelme <span className="text-blue-600 font-normal">Propiedades</span>
+                {branding.companyName}
               </h1>
               <div className="flex items-center gap-2">
                 <span className="w-2 h-2 bg-emerald-500 rounded-full animate-pulse" />
@@ -144,7 +145,7 @@ export default function PropertiesAdminClient({ initialProperties }: { initialPr
         {/* FOOTER SIMPLE */}
         <footer className="mt-20 pb-10 text-center">
            <p className="text-slate-400 text-[10px] font-bold uppercase tracking-[0.3em]">
-             Admin System &copy; {new Date().getFullYear()} - Riquelme Propiedades
+             Admin System &copy; {new Date().getFullYear()} - {branding.companyName}
            </p>
         </footer>
       </div>

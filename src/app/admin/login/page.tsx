@@ -65,7 +65,7 @@ export default function AdminLogin() {
               <User className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-500 w-4 h-4" />
               <Input 
                 type="email" 
-                placeholder="admin@riquelmeprop.com" 
+                placeholder="admin@tudominio.com" 
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 className="bg-white/5 border-white/10 pl-11 h-14 text-white focus:border-blue-500/50 focus:ring-0 transition-all rounded-xl"

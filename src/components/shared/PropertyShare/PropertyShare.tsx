@@ -2,6 +2,8 @@
 
 import { useCallback, useMemo, useState } from "react"
 import { usePathname } from "next/navigation"
+import { branding } from "@/utils/branding"
+import { Share2, Link, MessageCircle, Facebook, Linkedin, Check } from "lucide-react"
 
 interface PropertyShareProps {
   title: string
@@ -17,23 +19,20 @@ export default function PropertyShare({
   const pathname = usePathname()
   const [copied, setCopied] = useState(false)
 
-  // URL absoluta SSR-safe
   const url = useMemo(() => {
     const base =
-      process.env.BASE_URL ||
-      "https://riquelmeprop.com"
-    return `${base}${pathname}`
+      (typeof process !== "undefined" && process.env.NEXT_PUBLIC_BASE_URL) ||
+      branding.websiteUrl
+    return `${base.replace(/\/$/, "")}${pathname}`
   }, [pathname])
 
   const shareText = `${title} | ${price} | ${zone}`
 
-  // Seguro para SSR (no rompe hidratación)
   const canNativeShare =
     typeof navigator !== "undefined" && typeof navigator.share === "function"
 
   const handleNativeShare = useCallback(async () => {
     if (!canNativeShare) return
-
     try {
       await navigator.share({
         title,
@@ -46,37 +45,25 @@ export default function PropertyShare({
   }, [canNativeShare, title, shareText, url])
 
   const shareWhatsapp = useCallback(() => {
-    const wa = `https://wa.me/?text=${encodeURIComponent(
-      `${shareText} ${url}`
-    )}`
+    const wa = `https://wa.me/?text=${encodeURIComponent(`${shareText} ${url}`)}`
     window.open(wa, "_blank", "noopener,noreferrer")
   }, [shareText, url])
 
   const shareFacebook = useCallback(() => {
-    const fb = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(
-      url
-    )}`
+    const fb = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}`
     window.open(fb, "_blank", "noopener,noreferrer")
   }, [url])
 
   const shareLinkedin = useCallback(() => {
-    const li = `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(
-      url
-    )}`
+    const li = `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(url)}`
     window.open(li, "_blank", "noopener,noreferrer")
   }, [url])
 
   const copyLink = useCallback(async () => {
     try {
       await navigator.clipboard.writeText(url)
-
-      // Activamos toast (SIN useEffect, así evitamos loops)
       setCopied(true)
-
-      // Se oculta solo después de 2 segundos
-      setTimeout(() => {
-        setCopied(false)
-      }, 2000)
+      setTimeout(() => setCopied(false), 2000)
     } catch (error) {
       console.error("Copy link error:", error)
     }
@@ -84,59 +71,79 @@ export default function PropertyShare({
 
   return (
     <div className="w-full flex flex-col gap-4 relative">
-      {/* Botón compartir nativo */}
+      {/* Separador sutil */}
+      <div className="flex items-center gap-3 my-2">
+        <div className="h-px flex-1 bg-white/10" />
+        <span className="text-[10px] font-black uppercase tracking-[0.2em] text-white/30">Difundir</span>
+        <div className="h-px flex-1 bg-white/10" />
+      </div>
+
+      {/* Botón principal estilizado */}
       <button
         onClick={handleNativeShare}
         disabled={!canNativeShare}
-        className="w-full py-3 px-4 rounded-xl font-montserrat font-bold uppercase tracking-wide bg-gold-sand text-black hover:opacity-90 transition disabled:opacity-50 disabled:cursor-not-allowed"
+        className="flex items-center justify-center gap-3 w-full py-4 px-4 rounded-xl font-montserrat text-[11px] font-black uppercase tracking-[0.15em] bg-white/5 border border-white/10 text-white hover:bg-white/10 hover:border-emerald/50 transition-all active:scale-95 disabled:opacity-30 disabled:cursor-not-allowed group"
       >
-        Compartir propiedad
+        <Share2 size={16} className="text-emerald group-hover:scale-110 transition-transform" />
+        Compartir Ficha
       </button>
 
-      {/* Redes sociales */}
-      <div className="grid grid-cols-2 gap-2">
-        <button
-          onClick={shareWhatsapp}
-          className="w-full py-2.5 px-3 rounded-lg bg-[#25D366] text-white text-xs font-bold hover:opacity-90 transition"
+      {/* Grilla de Redes */}
+      <div className="grid grid-cols-4 gap-2">
+        <a
+          href="#!"
+          onClick={(e) => { e.preventDefault(); shareWhatsapp(); }}
+          className="flex items-center justify-center py-3 rounded-xl bg-white/5 border border-white/5 text-white/70 hover:text-[#25D366] hover:bg-[#25D366]/10 transition-all group"
+          title="WhatsApp"
         >
-          WhatsApp
-        </button>
+          <MessageCircle size={18} className="group-hover:scale-110 transition-transform" />
+        </a>
 
-        <button
-          onClick={shareFacebook}
-          className="w-full py-2.5 px-3 rounded-lg bg-[#1877F2] text-white text-xs font-bold hover:opacity-90 transition"
+        <a
+          href="#!"
+          onClick={(e) => { e.preventDefault(); shareFacebook(); }}
+          className="flex items-center justify-center py-3 rounded-xl bg-white/5 border border-white/5 text-white/70 hover:text-[#1877F2] hover:bg-[#1877F2]/10 transition-all group"
+          title="Facebook"
         >
-          Facebook
-        </button>
+          <Facebook size={18} className="group-hover:scale-110 transition-transform" />
+        </a>
 
-        <button
-          onClick={shareLinkedin}
-          className="w-full py-2.5 px-3 rounded-lg bg-[#0A66C2] text-white text-xs font-bold hover:opacity-90 transition"
+        <a
+          href="#!"
+          onClick={(e) => { e.preventDefault(); shareLinkedin(); }}
+          className="flex items-center justify-center py-3 rounded-xl bg-white/5 border border-white/5 text-white/70 hover:text-[#0A66C2] hover:bg-[#0A66C2]/10 transition-all group"
+          title="LinkedIn"
         >
-          LinkedIn
-        </button>
+          <Linkedin size={18} className="group-hover:scale-110 transition-transform" />
+        </a>
 
-        <button
-          onClick={copyLink}
-          className="w-full py-2.5 px-3 rounded-lg bg-gold-sand text-black text-xs font-bold hover:opacity-90 transition"
+        <a
+          href="#!"
+          onClick={(e) => { e.preventDefault(); copyLink(); }}
+          className={`flex items-center justify-center py-3 rounded-xl transition-all group ${
+            copied 
+              ? "bg-emerald text-white" 
+              : "bg-white/5 border border-white/5 text-white/70 hover:text-emerald hover:bg-emerald/10"
+          }`}
+          title="Copiar Link"
         >
-          Copiar link
-        </button>
+          {copied ? <Check size={18} /> : <Link size={18} className="group-hover:scale-110 transition-transform" />}
+        </a>
       </div>
 
-      {/* Toast moderno y sutil */}
+      {/* Toast minimalista */}
       <div
-        className={`pointer-events-none absolute left-1/2 -translate-x-1/2 top-full mt-3
-        px-4 py-2 rounded-lg text-sm font-medium
-        backdrop-blur-md bg-white/10 border border-white/20 text-white
-        shadow-xl transition-all duration-300
+        className={`absolute left-1/2 -translate-x-1/2 -top-12 px-4 py-2 rounded-full text-[10px] font-black uppercase tracking-widest
+        backdrop-blur-xl bg-emerald text-white shadow-[0_10px_20px_rgba(16,185,129,0.3)]
+        transition-all duration-500 flex items-center gap-2 whitespace-nowrap z-50
         ${
           copied
-            ? "opacity-100 translate-y-0"
-            : "opacity-0 -translate-y-2"
+            ? "opacity-100 translate-y-0 scale-100"
+            : "opacity-0 translate-y-4 scale-90 pointer-events-none"
         }`}
       >
-        🔗 Enlace copiado
+        <Check size={12} strokeWidth={4} />
+        Enlace listo para enviar
       </div>
     </div>
   )

@@ -7,11 +7,9 @@ export default async function Hero() {
   const allProperties = await getUiProperties({ limit: 20 });
 
   return (
-    <section className="w-full bg-oxford">
-
+    <section className="w-full bg-deep">
       {/* BLOQUE HERO */}
       <div className="relative w-full">
-
         {/* IMAGEN MOBILE */}
         <div className="block lg:hidden">
           <Image
@@ -36,16 +34,15 @@ export default async function Hero() {
           />
         </div>
 
-        {/* OVERLAY */}
-        <div className="absolute inset-0 bg-black/40" />
+        {/* OVERLAY NUEVO (deep + blur premium) */}
+        <div className="absolute inset-0 bg-deep/70 backdrop-blur-[2px]" />
 
         {/* CONTENIDO */}
         <div className="absolute inset-0 z-20 flex items-center justify-center mt-32">
-          <div className="w-full max-w-7xl mx-auto px-6 text-center">
-            
-            <h1 className="text-white text-4xl xl:text-5xl font-montserrat uppercase font-black italic mb-8 drop-shadow-2xl">
-              Estrategia para vender, <br />
-              <span className="text-gold-sand">visión para comprar.</span>
+          <div className="w-full max-w-7xl mx-auto px-6 text-center mb-8">
+            <h1 className="mb-4">
+              Expertos en gestión, <br />
+              <span className="text-emerald">líderes en resultados.</span>
             </h1>
 
             <div className="w-full max-w-md md:max-w-3xl lg:max-w-5xl mx-auto">
@@ -53,9 +50,7 @@ export default async function Hero() {
             </div>
           </div>
         </div>
-
       </div>
     </section>
   );
 }
-

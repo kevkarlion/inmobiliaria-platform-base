@@ -3,6 +3,7 @@ import { PropertyDetailClient } from "@/components/shared/PropertyDetailClient/P
 import { notFound } from "next/navigation";
 import { PropertyService } from "@/server/services/property.service";
 import type { Metadata } from "next";
+import { branding } from "@/utils/branding";
 
 // ⚡ IMPORTANTE: metadata dinámica por slug (clave para compartir)
 export async function generateMetadata({
@@ -29,7 +30,7 @@ export async function generateMetadata({
   const image = property.images?.[0];
 
   return {
-    metadataBase: new URL("https://riquelmeprop.com"), // 🔥 CLAVE
+    metadataBase: new URL(branding.websiteUrl),
     title,
     description,
     openGraph: {

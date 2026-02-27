@@ -1,87 +1,90 @@
 // layout.tsx
 import "@/app/globals.css";
 import { PropertyProvider } from "@/context/PropertyContext";
-import { Montserrat, Lora, Inter } from "next/font/google";
+import { Playfair_Display, Manrope } from "next/font/google";
 import Navbar from "@/components/shared/Navbar/Navbar";
 import Footer from "@/components/shared/Footer/Footer";
 import WhatsAppButton from "@/components/shared/WhatsAppButton/WhatsAppButton";
+import { branding } from "@/utils/branding";
+import { seoConfig } from "@/utils/seo";
 
-const montserrat = Montserrat({
+/* =========================
+   FONTS NUEVAS
+========================= */
+
+const playfair = Playfair_Display({
   subsets: ["latin"],
-  variable: "--font-montserrat",
-  weight: ["700"],
-});
-const lora = Lora({
-  subsets: ["latin"],
-  variable: "--font-lora",
-  weight: ["400", "600"],
-});
-const inter = Inter({
-  subsets: ["latin"],
-  variable: "--font-inter",
-  weight: ["400", "600"],
+  variable: "--font-heading",
+  weight: ["400", "600", "700"],
 });
 
+const manrope = Manrope({
+  subsets: ["latin"],
+  variable: "--font-body",
+  weight: ["400", "500", "600"],
+});
 
-// layout.tsx
+/* =========================
+   SEO DINÁMICO
+========================= */
+
+const defaultTitle = branding.locality
+  ? `${branding.companyName} | Inmobiliaria en ${branding.locality}`
+  : branding.companyName;
+
+const defaultDescription = branding.locality
+  ? `${branding.companyName} es una inmobiliaria en ${branding.locality}. ${seoConfig.defaultDescription}`
+  : seoConfig.defaultDescription;
+
+const ogDescription = branding.locality
+  ? `Encontrá casas, departamentos y terrenos en venta y alquiler en ${branding.locality}.`
+  : seoConfig.defaultDescription;
+
 export const metadata = {
-  metadataBase: new URL("https://riquelmeprop.com.ar"), // tu dominio real
+  metadataBase: new URL(branding.websiteUrl),
   title: {
-    default: "Riquelme Propiedades | Inmobiliaria en General Roca",
-    template: "%s | Riquelme Propiedades",
+    default: defaultTitle,
+    template: `%s | ${branding.companyName}`,
   },
-  description:
-    "Riquelme Propiedades es una inmobiliaria en General Roca, Río Negro. Venta y alquiler de casas, departamentos, terrenos y locales comerciales.",
-  keywords: [
-    "inmobiliaria general roca",
-    "casas en venta general roca",
-    "alquiler general roca",
-    "terrenos en venta rio negro",
-    "riquelme propiedades",
-  ],
-  authors: [{ name: "Riquelme Propiedades" }],
-  creator: "Riquelme Propiedades",
+  description: defaultDescription,
+  keywords: branding.locality
+    ? [
+        ...seoConfig.defaultKeywords,
+        `inmobiliaria ${branding.locality.toLowerCase()}`,
+        `propiedades ${branding.locality.toLowerCase()}`,
+      ]
+    : seoConfig.defaultKeywords,
+  authors: [{ name: branding.companyName }],
+  creator: branding.companyName,
   openGraph: {
-    title: "Riquelme Propiedades | Inmobiliaria en General Roca",
-    description:
-      "Encontrá casas, departamentos y terrenos en venta y alquiler en General Roca, Río Negro.",
-    url: "https://riquelmeprop.com",
-    siteName: "Riquelme Propiedades",
-    locale: "es_AR",
-    type: "website",
+    title: defaultTitle,
+    description: ogDescription,
+    url: branding.websiteUrl,
+    siteName: branding.companyName,
+    locale: seoConfig.locale,
+    type: seoConfig.type,
     images: [
       {
-        url: "/og-image.png", // 1200x630
-        width: 1200,
-        height: 630,
-        alt: "Riquelme Propiedades",
+        url: seoConfig.defaultOgImage,
+        width: seoConfig.defaultOgImageWidth,
+        height: seoConfig.defaultOgImageHeight,
+        alt: branding.companyName,
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Riquelme Propiedades",
-    description:
-      "Inmobiliaria en General Roca, Río Negro. Venta y alquiler de propiedades.",
-    images: ["/og-image.png"],
+    title: branding.companyName,
+    description: defaultDescription,
+    images: [seoConfig.defaultOgImage],
   },
-  icons: {
-    icon: "/icon.png",          // 512x512
-    shortcut: "/favicon.ico",   // clásico
-    apple: "/apple-icon.png",   // 180x180
-  },
-  robots: {
-    index: true,
-    follow: true,
-    googleBot: {
-      index: true,
-      follow: true,
-      "max-image-preview": "large",
-      "max-snippet": -1,
-    },
-  },
+  icons: seoConfig.icons,
+  robots: seoConfig.robots,
 };
 
+/* =========================
+   ROOT LAYOUT
+========================= */
 
 export default function RootLayout({
   children,
@@ -91,13 +94,12 @@ export default function RootLayout({
   return (
     <html
       lang="es"
-      className={`${montserrat.variable} ${lora.variable} ${inter.variable}`}
+      className={`${playfair.variable} ${manrope.variable}`}
     >
-      <body className="bg-oxford overflow-x-hidden">
+      <body className="bg-oxford overflow-x-hidden font-sans">
         <PropertyProvider>
           <Navbar />
-          
-          {/* Nada raro acá */}
+
           <main className="flex flex-col">
             {children}
           </main>

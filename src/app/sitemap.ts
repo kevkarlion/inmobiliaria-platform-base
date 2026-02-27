@@ -1,10 +1,11 @@
 import { MetadataRoute } from "next";
 import { PropertyService } from "@/server/services/property.service";
+import { branding } from "@/utils/branding";
 
 export const revalidate = 86400;
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const base = "https://www.riquelmeprop.com";
+  const base = branding.websiteUrl.replace(/\/$/, "");
 
   const properties = await PropertyService.findAllForSitemap();
 
