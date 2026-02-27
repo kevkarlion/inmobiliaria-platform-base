@@ -11,7 +11,7 @@ const MONGO_URI = process.env.MONGODB_URI || "tu_mongodb_uri_aqui";
 async function runSeed() {
   try {
     await mongoose.connect(MONGO_URI);
-    console.log("✅ Conectado a MongoDB");
+    
 
     await Province.deleteMany({});
     await City.deleteMany({});
@@ -101,8 +101,7 @@ async function runSeed() {
 
     await City.insertMany(data);
 
-    console.log(`🚀 Seed finalizado con éxito.`);
-    console.log(`✅ Río Negro, Neuquén, Buenos Aires y opción "Genérica" listas.`);
+   
     
     process.exit(0);
   } catch (error) {

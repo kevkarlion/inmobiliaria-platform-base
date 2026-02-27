@@ -2,7 +2,7 @@
 
 import { useRef } from "react";
 import Link from "next/link";
-import { ChevronLeft, ChevronRight } from "lucide-react";
+import { ChevronLeft, ChevronRight, ArrowRight } from "lucide-react";
 import { PropertyUI } from "@/domain/types/PropertyUI.types";
 import PropertyCardHome from "@/components/shared/PropertyCardHome/PropertyCardHome";
 import { BASE_URL } from "@/lib/config";
@@ -21,12 +21,11 @@ export default function PropertyGrid({
   filter,
 }: Props) {
   const scrollRef = useRef<HTMLDivElement>(null);
- 
 
   const scroll = (direction: "left" | "right") => {
     if (scrollRef.current) {
       const { scrollLeft } = scrollRef.current;
-      const scrollAmount = 444;
+      const scrollAmount = 400;
       const scrollTo =
         direction === "left"
           ? scrollLeft - scrollAmount
@@ -36,67 +35,64 @@ export default function PropertyGrid({
   };
 
   const getButtonText = () => {
-    if (filter === "oportunidad") return "Conocé todas las oportunidades";
-    if (filter === "venta") return "Conocé todas las ventas";
-    if (filter === "alquiler") return "Conocé todos los alquileres";
-    return "Ver todas";
+    if (filter === "oportunidad") return "Explorar Oportunidades";
+    if (filter === "venta") return "Ver Portfolio en Venta";
+    if (filter === "alquiler") return "Catálogo de Alquileres";
+    return "Ver todas las propiedades";
   };
 
   return (
-    <div className="relative w-full py-8 bg-slate-100 overflow-hidden border-y border-slate-100">
-      {/* Patrón decorativo */}
+    <div className="relative w-full py-20 overflow-hidden bg-white">
+      {/* Patrón decorativo con el nuevo Emerald */}
       <div
-        className="absolute inset-0 z-0 opacity-[0.4] pointer-events-none"
+        className="absolute inset-0 z-0 opacity-[0.15] pointer-events-none"
         style={{
-          backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23cbd5e1' fill-opacity='0.15'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
+          backgroundImage: `url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='2' cy='2' r='1' fill='%2300B894'/%3E%3C/svg%3E")`,
         }}
       />
 
-      <div className="max-w-350 mx-auto px-6 relative z-10">
-        {/* Cabecera */}
-        <div className="flex flex-col items-center text-center mb-16 space-y-5">
-          <div className="max-w-4xl space-y-4">
-            <div className="flex items-center justify-center gap-6">
-              <div className="hidden md:flex items-center">
-                <div className="w-12 lg:w-20 h-px bg-slate-200" />
-                <div className="w-1.5 h-1.5 rounded-full bg-gold-sand ml-2" />
-              </div>
-
-              <h2 className="font-montserrat text-3xl md:text-4xl 2xl:text-5xl font-black text-slate-900 uppercase tracking-tighter shrink-0">
-                {title}
-              </h2>
-
-              <div className="hidden md:flex items-center">
-                <div className="w-1.5 h-1.5 rounded-full bg-gold-sand mr-2" />
-                <div className="w-12 lg:w-20 h-px bg-slate-200" />
-              </div>
+      <div className="max-w-7xl mx-auto px-6 relative z-10">
+        
+        {/* Cabecera con acento Emerald */}
+        <div className="flex flex-col items-center text-center mb-16 space-y-6">
+          <div className="space-y-3">
+            <div className="flex items-center justify-center gap-4">
+              <span className="h-px w-10 bg-emerald" />
+              <span className="font-montserrat text-[10px] font-black uppercase tracking-[0.4em] text-emerald">
+                Selección de Activos
+              </span>
+              <span className="h-px w-10 bg-emerald" />
             </div>
 
-            <p className="font-lora text-slate-600 text-sm md:text-lg leading-relaxed max-w-2xl mx-auto italic">
+            <h2 className="font-montserrat text-4xl md:text-6xl font-black text-slate-900 uppercase tracking-tighter">
+              {title}
+            </h2>
+            
+            <p className="font-lora text-slate-500 text-base md:text-xl leading-relaxed max-w-2xl mx-auto italic">
               {subtitle}
             </p>
+          </div>
 
-            {/* Divisor */}
-            <div className="flex justify-center items-center gap-3">
-              <div className="w-2 h-2 rotate-45 border border-gold-sand bg-gold-sand/20" />
-              <div className="w-16 h-px bg-gold-sand/40" />
-              <div className="w-2 h-2 rotate-45 border border-gold-sand bg-gold-sand/20" />
-            </div>
+          {/* Divisor Emerald */}
+          <div className="flex justify-center items-center gap-2">
+            <div className="w-2 h-2 rounded-full bg-emerald" />
+            <div className="w-16 h-px bg-emerald/30" />
+            <div className="w-2 h-2 rounded-full bg-emerald" />
           </div>
         </div>
 
         {/* Carrusel */}
-        <div className="relative group">
-          <div className="hidden md:block">
+        <div className="relative group/carousel">
+          <div className="hidden lg:block">
             <button
               onClick={() => scroll("left")}
-              className="absolute -left-4 top-1/2 -translate-y-1/2 z-30 p-4 rounded-full bg-white shadow-2xl border border-slate-100 text-slate-900 hover:bg-slate-900 hover:text-white transition-all duration-500 opacity-0 group-hover:opacity-100"
+              className="absolute -left-6 top-1/2 -translate-y-1/2 z-30 w-14 h-14 flex items-center justify-center rounded-2xl bg-white shadow-xl border border-emerald/20 text-emerald hover:bg-emerald hover:text-white transition-all duration-500 opacity-0 group-hover/carousel:opacity-100 -translate-x-4 group-hover/carousel:translate-x-0"
             >
               <ChevronLeft size={28} />
             </button>
             <button
               onClick={() => scroll("right")}
-              className="absolute -right-4 top-1/2 -translate-y-1/2 z-30 p-4 rounded-full bg-white shadow-2xl border border-slate-100 text-slate-900 hover:bg-slate-900 hover:text-white transition-all duration-500 opacity-0 group-hover:opacity-100"
+              className="absolute -right-6 top-1/2 -translate-y-1/2 z-30 w-14 h-14 flex items-center justify-center rounded-2xl bg-white shadow-xl border border-emerald/20 text-emerald hover:bg-emerald hover:text-white transition-all duration-500 opacity-0 group-hover/carousel:opacity-100 translate-x-4 group-hover/carousel:translate-x-0"
             >
               <ChevronRight size={28} />
             </button>
@@ -104,44 +100,47 @@ export default function PropertyGrid({
 
           <div
             ref={scrollRef}
-            className="flex flex-nowrap gap-8 overflow-x-auto pb-12 scrollbar-hide snap-x snap-mandatory px-4"
+            className="flex flex-nowrap gap-6 lg:gap-10 overflow-x-auto pb-16 scrollbar-hide snap-x snap-mandatory px-2"
             style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
           >
             {properties.map((item) => (
               <div
                 key={item.id}
-                className="snap-start shrink-0 transition-all duration-500 hover:-translate-y-3"
+                className="snap-start shrink-0 transition-transform duration-700"
               >
+                {/* Aquí el componente PropertyCardHome debería recibir colores de marca internos */}
                 <PropertyCardHome property={item} />
               </div>
             ))}
           </div>
         </div>
 
-        {/* Mobile nav */}
-        <div className="flex md:hidden justify-center gap-6 mt-2">
+        {/* Controles Mobile Emerald */}
+        <div className="flex lg:hidden justify-center gap-4 -mt-6 mb-10">
           <button
             onClick={() => scroll("left")}
-            className="p-4 rounded-full bg-white border border-slate-200 shadow-md active:scale-90 transition-all"
+            className="w-12 h-12 rounded-xl bg-white border border-emerald/20 shadow-lg flex items-center justify-center text-emerald active:scale-90 transition-all"
           >
-            <ChevronLeft size={24} className="text-slate-700" />
+            <ChevronLeft size={24} />
           </button>
           <button
             onClick={() => scroll("right")}
-            className="p-4 rounded-full bg-slate-900 text-white shadow-lg active:scale-90 transition-all"
+            className="w-12 h-12 rounded-xl bg-emerald text-white shadow-lg flex items-center justify-center active:scale-90 transition-all"
           >
             <ChevronRight size={24} />
           </button>
         </div>
 
-        {/* CTA final */}
-        <div className="flex justify-center mt-6 mb-14">
-          <Link className="" href={`${BASE_URL}/search-type/${filter}`}>
-            <button className="btn-cta bg-oxford">
+        {/* CTA con Emerald Hover */}
+        <div className="flex justify-center mt-4">
+          <Link href={`${BASE_URL}/search-type/${filter}`}>
+            <button className="flex items-center gap-4 bg-emerald hover:bg-emerald-hover text-white px-10 py-5 rounded-2xl font-black text-[11px] uppercase tracking-[0.2em] transition-all duration-500 shadow-xl shadow-emerald/20 group">
               {getButtonText()}
+              <ArrowRight size={18} className="group-hover:translate-x-2 transition-transform" />
             </button>
           </Link>
         </div>
+
       </div>
     </div>
   );

@@ -13,77 +13,78 @@ export default function PropertyCardHome({ property }: Props) {
   return (
     <Link 
       href={`/property/${property.slug}`}
-      className="group relative shrink-0 w-75 md:w-105 h-60 bg-slate-900 rounded-xl overflow-hidden shadow-sm hover:shadow-2xl transition-all duration-700 border border-white/10 block"
+      className="group relative shrink-0 w-75 md:w-105 h-64 bg-deep rounded-4xl overflow-hidden shadow-lg hover:shadow-emerald/20 transition-all duration-700 border border-white/5 block"
     >
-      {/* Imagen de fondo */}
+      {/* Imagen de fondo con opacidad controlada */}
       <div className="absolute inset-0 z-0">
         <Image
           src={property.images[0] || "/placeholder.jpg"}
           alt={property.title}
           fill
-          className="object-cover group-hover:scale-110 transition-transform duration-1000 opacity-70 group-hover:opacity-50"
+          className="object-cover group-hover:scale-105 transition-transform duration-1000 opacity-60 group-hover:opacity-40"
         />
       </div>
 
-      {/* Gradiente Negro */}
-      <div className="absolute inset-0 bg-linear-to-t from-black/95 via-black/40 to-transparent z-10" />
+      {/* Gradiente usando tu color Deep */}
+      <div className="absolute inset-0 bg-linear-to-t from-deep via-deep/40 to-transparent z-10" />
 
-      {/* Contenido Superpuesto */}
-      <div className="relative z-20 h-full p-6 flex flex-col justify-between font-montserrat">
+      {/* Contenido */}
+      <div className="relative z-20 h-full p-7 flex flex-col justify-between font-montserrat">
         
-        {/* Superior: Tags y Características */}
+        {/* Superior: Tags con Emerald */}
         <div className="flex justify-between items-start">
           <div className="flex flex-col gap-2">
-            <span className="bg-gold-sand text-slate-900 text-[9px] font-black uppercase px-2.5 py-1 rounded-full tracking-widest w-fit">
+            <span className="bg-emerald text-white text-[10px] font-black uppercase px-3 py-1.5 rounded-xl tracking-widest w-fit shadow-lg shadow-emerald/20">
               {property.operationType}
             </span>
-            {/* Etiqueta de Oportunidad Condicional */}
             {property.opportunity && (
-              <span className="bg-white/10 backdrop-blur-md text-gold-sand text-[8px] font-black uppercase px-2.5 py-1 rounded-full tracking-[0.2em] border border-gold-sand/30 flex items-center gap-1 w-fit">
-                <Sparkles size={10} /> Oportunidad
+              <span className="bg-white/10 backdrop-blur-md text-emerald text-[9px] font-black uppercase px-3 py-1.5 rounded-xl tracking-[0.2em] border border-emerald/30 flex items-center gap-1 w-fit">
+                <Sparkles size={12} /> Oportunidad
               </span>
             )}
           </div>
           
-          <div className="flex gap-1.5">
-            <div className="flex items-center gap-1 backdrop-blur-md bg-white/5 px-2.5 py-1 rounded-full border border-white/10 text-white">
-              <BedDouble size={12} className="text-gold-sand" />
-              <span className="text-[10px] font-bold">{property.rooms || 0}</span>
+          {/* Características */}
+          <div className="flex gap-2 font-inter">
+            <div className="flex items-center gap-1.5 backdrop-blur-md bg-deep/60 px-3 py-1.5 rounded-xl border border-white/10 text-white">
+              <BedDouble size={14} className="text-emerald" />
+              <span className="text-[11px] font-bold">{property.rooms || 0}</span>
             </div>
-            <div className="flex items-center gap-1 backdrop-blur-md bg-white/5 px-2.5 py-1 rounded-full border border-white/10 text-white">
-              <Square size={10} className="text-gold-sand" />
-              <span className="text-[10px] font-bold">{property.coveredM2 || 0}m²</span>
+            <div className="flex items-center gap-1.5 backdrop-blur-md bg-deep/60 px-3 py-1.5 rounded-xl border border-white/10 text-white">
+              <Square size={12} className="text-emerald" />
+              <span className="text-[11px] font-bold">{property.coveredM2 || 0}m²</span>
             </div>
           </div>
         </div>
 
         {/* Inferior: Información Principal */}
-        <div className="space-y-2">
+        <div className="space-y-3">
           <div>
-            <p className="text-gold-sand text-[8px] font-black uppercase tracking-[0.3em] mb-0.5">
+            <p className="text-emerald text-[9px] font-black uppercase tracking-[0.4em] mb-1">
               {property.typeName}
             </p>
-            <h3 className="text-white text-lg md:text-xl font-black leading-tight uppercase italic tracking-tighter line-clamp-1">
+            <h3 className="text-white text-xl md:text-2xl font-black leading-tight uppercase italic tracking-tighter line-clamp-1 group-hover:text-emerald transition-colors">
               {property.title}
             </h3>
           </div>
 
-          <div className="flex items-end justify-between">
-            <div className="space-y-0.5">
-              <div className="text-white text-2xl font-black tracking-tighter leading-none">
-                <span className="text-gold-sand text-xs font-bold mr-0.5">{property.currency}</span>
+          <div className="flex items-end justify-between border-t border-white/10 pt-4">
+            <div className="space-y-1">
+              <div className="text-white text-2xl font-black tracking-tighter leading-none flex items-baseline">
+                <span className="text-emerald text-xs font-bold mr-1">{property.currency}</span>
                 {property.amount.toLocaleString("es-AR")}
               </div>
-              <div className="flex items-center gap-1 text-white/60">
-                <MapPin size={12} className="text-gold-sand" />
-                <p className="font-lora text-[11px] italic truncate w-36 md:w-48">
+              <div className="flex items-center gap-1.5 text-white/50">
+                <MapPin size={13} className="text-emerald" />
+                <p className="font-lora text-[12px] italic truncate w-36 md:w-52">
                   {property.cityName || "Patagonia"}
                 </p>
               </div>
             </div>
 
-            <div className="bg-white/5 backdrop-blur-sm p-2.5 rounded-full group-hover:bg-gold-sand group-hover:text-slate-900 transition-all duration-500 text-white border border-white/10">
-              <ChevronRight size={18} />
+            {/* Botón de acción con Emerald y Emerald-Hover */}
+            <div className="bg-emerald p-3 rounded-2xl text-white shadow-lg shadow-emerald/20 group-hover:bg-emerald-hover group-hover:scale-110 transition-all duration-500">
+              <ChevronRight size={20} strokeWidth={3} />
             </div>
           </div>
         </div>

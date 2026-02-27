@@ -166,14 +166,14 @@ export default function NosotrosPage() {
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-12">
             {teamMembers.map((member, index) => (
               <div key={index} className="group">
-                <div className="relative w-full aspect-[4/5] mb-8 overflow-hidden rounded-2xl shadow-2xl">
+                <div className="relative w-full aspect-4/5 mb-8 overflow-hidden rounded-2xl shadow-2xl">
                   <Image
                     src={member.image}
                     alt={member.name}
                     fill
                     className="object-cover grayscale group-hover:grayscale-0 transition-all duration-700 group-hover:scale-105"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-deep via-transparent to-transparent opacity-60" />
+                  <div className="absolute inset-0 bg-linear-to-t from-deep via-transparent to-transparent opacity-60" />
                 </div>
                 <h4 className="font-montserrat text-2xl font-bold text-white uppercase mb-2 group-hover:text-emerald transition-colors">
                   {member.name}

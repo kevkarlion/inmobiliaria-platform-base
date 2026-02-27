@@ -33,7 +33,7 @@ export function PropertyDetailClient({
                 </span>
               )}
               {p.premium && (
-                <span className="bg-gradient-to-r from-deep to-slate-700 text-white text-[10px] font-black uppercase tracking-[0.2em] px-4 py-1.5 rounded-full border border-white/20">
+                <span className="bg-linear-to-r from-deep to-slate-700 text-white text-[10px] font-black uppercase tracking-[0.2em] px-4 py-1.5 rounded-full border border-white/20">
                   Premium Estate
                 </span>
               )}
@@ -63,7 +63,7 @@ export function PropertyDetailClient({
         </div>
 
         {/* GALERÍA DE ALTO IMPACTO */}
-        <div className="mb-16 rounded-[2rem] overflow-hidden shadow-2xl border-8 border-white">
+        <div className="mb-16 rounded-4xl overflow-hidden shadow-2xl border-8 border-white">
           <PropertyGallery images={p.images} />
         </div>
 
@@ -131,9 +131,10 @@ export function PropertyDetailClient({
               </h3>
 
               <div className="space-y-6 relative z-10">
-                <Item label="Dirección" value={`${p.street} ${p.number}`} light />
-                <Item label="Zona / Barrio" value={`${p.barrioName}, ${p.cityName}`} light />
                 <Item label="Provincia" value={p.provinceName} light />
+                <Item label="Localidad" value={p.cityName} light />
+                {p.barrioName && <Item label="Barrio" value={p.barrioName} light />}
+                <Item label="Dirección" value={`${p.street} ${p.number}`} light />
               </div>
 
               {p.mapsUrl && (
