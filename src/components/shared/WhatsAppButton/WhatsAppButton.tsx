@@ -9,7 +9,7 @@ const WhatsAppButton = () => {
 
   return (
     <a
-      href="#!"
+      href="#"
       onClick={(e) => {
         e.preventDefault();
         window.open(whatsappUrl, "_blank", "noopener,noreferrer");

@@ -47,13 +47,13 @@ export const metadata = {
     template: `%s | ${branding.companyName}`,
   },
   description: defaultDescription,
-  keywords: branding.locality
-    ? [
-        ...seoConfig.defaultKeywords,
-        `inmobiliaria ${branding.locality.toLowerCase()}`,
-        `propiedades ${branding.locality.toLowerCase()}`,
-      ]
-    : seoConfig.defaultKeywords,
+  // keywords: branding.locality
+  //   ? [
+  //       ...seoConfig.defaultKeywords,
+  //       `inmobiliaria ${branding.locality.toLowerCase()}`,
+  //       `propiedades ${branding.locality.toLowerCase()}`,
+  //     ]
+  //   : seoConfig.defaultKeywords,
   authors: [{ name: branding.companyName }],
   creator: branding.companyName,
   openGraph: {
