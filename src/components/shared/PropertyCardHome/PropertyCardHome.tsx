@@ -39,7 +39,7 @@ export default function PropertyCardHome({ property }: Props) {
             </span>
             {property.opportunity && (
               <span className="bg-white/10 backdrop-blur-md text-emerald text-[9px] font-black uppercase px-3 py-1.5 rounded-xl tracking-[0.2em] border border-emerald/30 flex items-center gap-1 w-fit">
-                <Sparkles size={12} /> Oportunidad
+                <Sparkles size={12} /> Destacada
               </span>
             )}
           </div>

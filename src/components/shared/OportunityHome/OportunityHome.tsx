@@ -15,8 +15,9 @@ export default async function OportunityHome() {
 
   return (
     <PropertyGrid
-      title="Oportunidades"
-      subtitle="Oportunidades de Inversión Selección exclusiva de propiedades con condiciones únicas de mercado. Ya sea por su valor competitivo, ubicación estratégica o potencial de revalorización, estas unidades representan una ventaja real para quienes buscan capitalizar su inversión con beneficios inmediatos."
+      title="Destacadas"
+      subtitle="Una selección exclusiva de inmuebles que sobresalen por su ubicación estratégica, valor competitivo y alto potencial de revalorización.
+Cada unidad ha sido cuidadosamente elegida por reunir condiciones diferenciales dentro del mercado actual, ofreciendo una ventaja concreta para quienes buscan invertir con visión y asegurar resultados desde el primer momento."
       properties={properties}
       filter="oportunidad"
     />

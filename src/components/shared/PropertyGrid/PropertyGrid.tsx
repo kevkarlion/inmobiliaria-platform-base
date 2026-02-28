@@ -36,7 +36,7 @@ export default function PropertyGrid({
   };
 
   const getButtonText = () => {
-    if (filter === "oportunidad") return "Explorar Oportunidades";
+    if (filter === "oportunidad") return "Explorar Destacadas";
     if (filter === "venta") return "Ver Portfolio en Venta";
     if (filter === "alquiler") return "Catálogo de Alquileres";
     return "Ver todas las propiedades";

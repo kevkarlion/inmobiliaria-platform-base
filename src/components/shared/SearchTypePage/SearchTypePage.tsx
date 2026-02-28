@@ -76,7 +76,7 @@ export default function SearchTypePage({ properties, filterParam }: Props) {
     const titles: Record<string, string> = {
       venta: "Propiedades en Venta",
       alquiler: "Propiedades en Alquiler",
-      oportunidad: "Oportunidades Únicas",
+      oportunidad: "Destacadas",
     };
     return titles[filterParam] || "Nuestras Propiedades";
   };

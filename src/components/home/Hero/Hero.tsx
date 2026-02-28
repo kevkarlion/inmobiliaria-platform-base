@@ -13,7 +13,7 @@ export default async function Hero() {
         {/* IMAGEN MOBILE */}
         <div className="block lg:hidden">
           <Image
-            src="/hero-mobile.webp"
+            src="/bg-hero.png"
             alt="Hero Mobile"
             width={1600}
             height={1000}

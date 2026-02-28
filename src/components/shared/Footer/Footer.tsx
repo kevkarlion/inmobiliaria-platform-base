@@ -42,7 +42,7 @@ const Footer: React.FC = () => {
               Alquileres Selectos <ArrowUpRight size={12} className="opacity-0 group-hover:opacity-100 transition-opacity text-emerald" />
             </Link>
             <Link href="/search-type/oportunidad" className="text-white/60 hover:text-white transition-all flex items-center gap-2 group">
-              Oportunidades <ArrowUpRight size={12} className="opacity-0 group-hover:opacity-100 transition-opacity text-emerald" />
+              Destacadas <ArrowUpRight size={12} className="opacity-0 group-hover:opacity-100 transition-opacity text-emerald" />
             </Link>
             <Link href="/contacto" className="text-white/60 hover:text-white transition-all flex items-center gap-2 group">
               Canales de Contacto <ArrowUpRight size={12} className="opacity-0 group-hover:opacity-100 transition-opacity text-emerald" />

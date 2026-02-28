@@ -161,7 +161,7 @@ export default function Navbar() {
                 href="#"
                 className="hidden lg:block text-xs font-bold bg-coral hover:bg-coral-hover text-white px-5 py-2.5 rounded-sm transition-all shadow-md active:scale-95"
               >
-                TASAR AHORA
+                COTIZAR PROPIEDAD
               </a>
 
               <button
