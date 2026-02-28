@@ -150,7 +150,7 @@ export function PropertyDetailClient({
                   </div>
                   <a
                     href={p.externalMapsUrl}
-                    target="_blank"
+                    
                     rel="noopener noreferrer"
                     className="flex justify-center items-center gap-2 w-full py-3 rounded-xl bg-white/5 hover:bg-white/10 text-emerald text-xs font-black uppercase tracking-widest transition-all"
                   >
@@ -163,7 +163,7 @@ export function PropertyDetailClient({
                 {p.contactPhone && (
                   <a
                     href={`https://wa.me/54${p.contactPhone}`}
-                    target="_blank"
+                    
                     rel="noopener noreferrer"
                     className="btn-cta bg-emerald hover:bg-white hover:text-deep text-center w-full py-5 rounded-2xl font-black uppercase tracking-[0.2em] transition-all transform hover:-translate-y-1 shadow-lg shadow-emerald/20"
                   >

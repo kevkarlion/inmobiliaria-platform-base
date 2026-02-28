@@ -35,7 +35,7 @@ export default function PropertyCardHome({ property }: Props) {
         <div className="flex justify-between items-start">
           <div className="flex flex-col gap-2">
             <span className="bg-emerald text-white text-[10px] font-black uppercase px-3 py-1.5 rounded-xl tracking-widest w-fit shadow-lg shadow-emerald/20">
-              {property.operationType}
+              {property.operationType === "alquiler" ? "Alquiler" : "Venta"}
             </span>
             {property.opportunity && (
               <span className="bg-white/10 backdrop-blur-md text-emerald text-[9px] font-black uppercase px-3 py-1.5 rounded-xl tracking-[0.2em] border border-emerald/30 flex items-center gap-1 w-fit">

@@ -40,7 +40,7 @@ export default function ContactoPage() {
           {/* WhatsApp Card */}
           <a
             href="#"
-            target="_blank"
+            
             rel="noopener noreferrer"
             className="group p-10 bg-white rounded-4xl border border-deep/5 hover:border-emerald transition-all duration-500 shadow-sm hover:shadow-xl"
           >
@@ -146,8 +146,8 @@ export default function ContactoPage() {
             Utilizamos métodos comparativos y análisis de entorno para determinar el valor real de mercado de su propiedad.
           </p>
           <a
-            href="https://wa.me/5492984582082?text=Hola!%20Deseo%20solicitar%20una%20tasación."
-            target="_blank"
+            href="#"
+            
             rel="noopener noreferrer"
             className="btn-cta rounded-full group px-12 py-6 text-sm uppercase tracking-widest shadow-[0_20px_50px_rgba(255,90,95,0.3)]"
           >

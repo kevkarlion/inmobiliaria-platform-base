@@ -2,6 +2,13 @@
 // src/dtos/property/property-response.dto.ts
 import { Property } from "@/domain/types/Property.types";
 
+/** Normaliza operationType desde DB/API (soporta undefined y distintas mayúsculas) */
+function normalizeOperationType(value: unknown): "venta" | "alquiler" {
+  if (value == null || value === "") return "venta";
+  const v = String(value).toLowerCase().trim();
+  return v === "alquiler" ? "alquiler" : "venta";
+}
+
 /**
  * Nodo simple para entidades pobladas (province, city, barrio)
  */
@@ -83,7 +90,7 @@ export function propertyResponseDTO(property: any): PropertyResponse {
       slug: property.propertyType.slug,
     },
 
-    operationType: property.operationType,
+    operationType: normalizeOperationType(property.operationType),
 
     address: {
       street: property.address.street,

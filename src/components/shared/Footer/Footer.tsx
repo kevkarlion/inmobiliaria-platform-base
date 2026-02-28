@@ -93,7 +93,7 @@ const Footer: React.FC = () => {
             Desarrollo por{" "}
             <a
               href={branding.developerCredit.url}
-              target="_blank"
+              
               rel="noopener noreferrer"
               className="text-white/40 hover:text-emerald transition-colors duration-300 font-black border-b border-transparent hover:border-emerald pb-0.5"
             >

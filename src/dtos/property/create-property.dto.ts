@@ -47,7 +47,9 @@ export class CreatePropertyDTO {
     if (!data.city) throw new BadRequestError("La localidad es requerida");
 
     this.title = data.title;
-    this.operationType = data.operationType;
+    // Normalizar operationType: solo "venta" | "alquiler" (evita que se pierda o llegue con otro formato)
+    const raw = (data.operationType && String(data.operationType).toLowerCase()) || "";
+    this.operationType = raw === "alquiler" ? "alquiler" : "venta";
     this.propertyTypeSlug = data.propertyTypeSlug;
     this.description = data.description || "";
     this.contactPhone = data.contactPhone || ""; // 👈 Mapeo del teléfono

@@ -1,8 +1,10 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { PropertyUI } from "@/domain/types/PropertyUI.types";
 
-function normalizeOperation(value: string): "venta" | "alquiler" {
-  return (value === "venta" || value === "alquiler") ? value : "venta";
+function normalizeOperation(value: unknown): "venta" | "alquiler" {
+  if (value == null || value === "") return "venta";
+  const v = String(value).toLowerCase().trim();
+  return v === "alquiler" ? "alquiler" : "venta";
 }
 
 export function mapPropertyToUI(property: any): PropertyUI {

@@ -25,7 +25,7 @@ export default async function Hero() {
         {/* IMAGEN DESKTOP */}
         <div className="hidden lg:block">
           <Image
-            src="/bg-hero.webp"
+            src="/bg-hero.png"
             alt="Hero Desktop"
             width={2400}
             height={1400}

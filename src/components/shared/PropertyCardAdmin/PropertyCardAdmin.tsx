@@ -17,9 +17,14 @@ export default function PropertyCardAdmin({ property, onDelete, onEdit }: Props)
         <span className="text-[10px] font-mono text-slate-400 truncate flex items-center gap-1">
           <Hash size={12} /> {property.id}
         </span>
-        <span className="bg-slate-200 text-slate-700 text-[10px] px-2 py-0.5 rounded font-medium uppercase">
-          {property.propertyType?.name}
-        </span>
+        <div className="flex items-center gap-2">
+          <span className="bg-slate-200 text-slate-700 text-[10px] px-2 py-0.5 rounded font-medium uppercase">
+            {property.propertyType?.name}
+          </span>
+          <span className="bg-emerald/20 text-emerald-700 text-[10px] px-2 py-0.5 rounded font-medium uppercase">
+            {property.operationType === "alquiler" ? "Alquiler" : "Venta"}
+          </span>
+        </div>
       </div>
 
       <div className="p-4 grow">

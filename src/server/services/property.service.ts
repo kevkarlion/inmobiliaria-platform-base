@@ -78,11 +78,16 @@ export class PropertyService {
     }
 
     // 5. Mapear DTO a IProperty (CON CAMBIOS EN CONTACTPHONE Y AGE)
+    const operationType: "venta" | "alquiler" =
+      (dto.operationType && String(dto.operationType).toLowerCase()) === "alquiler"
+        ? "alquiler"
+        : "venta";
+
     const propertyToSave: Partial<IProperty> = {
       title: dto.title,
       slug: slug,
       contactPhone: dto.contactPhone, // 👈 Se agrega a la raíz
-      operationType: dto.operationType as "venta" | "alquiler",
+      operationType,
       propertyType: propertyType._id,
       price: {
         amount: dto.price.amount,
@@ -210,11 +215,19 @@ export class PropertyService {
 
     const total = await PropertyRepository.count(filter);
 
-    const normalized = items.map((obj: any) => ({
-      ...obj,
-      _id: obj._id.toString(),
-      images: obj.images || [],
-    }));
+    const normalized = items.map((obj: any) => {
+      const op = obj.operationType;
+      const operationType =
+        op != null && String(op).toLowerCase().trim() === "alquiler"
+          ? "alquiler"
+          : "venta";
+      return {
+        ...obj,
+        _id: obj._id.toString(),
+        images: obj.images || [],
+        operationType,
+      };
+    });
 
     return {
       items: normalized,

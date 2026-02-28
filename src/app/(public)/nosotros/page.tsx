@@ -20,18 +20,18 @@ const teamMembers: TeamMember[] = [
   {
     name: "Julián Ferraro",
     title: "Director de Estrategia Inmobiliaria",
-    image: "/diego.webp", // Mantengo los paths para que no se rompan las imágenes
+    image: "/img1.png", // Mantengo los paths para que no se rompan las imágenes
     registration: "Mat. Prof. 882-DF",
   },
   {
     name: "Valentina Soler",
     title: "Head of Luxury Real Estate",
-    image: "/chica1.webp",
+    image: "/img2.png",
   },
   {
-    name: "Marcos Lombardi",
-    title: "Consultor de Inversiones",
-    image: "/chica2.webp",
+    name: "Maria Lombardi",
+    title: "Consultora de Inversiones",
+    image: "/img3.png",
   },
 ];
 
@@ -200,8 +200,8 @@ export default function NosotrosPage() {
             <span className="text-coral">nueva etapa</span> hoy
           </h2>
           <a
-            href="https://wa.me/5492984582082"
-            target="_blank"
+            href="#"
+            
             rel="noopener noreferrer"
             className="btn-cta rounded-full group px-10 py-5"
           >

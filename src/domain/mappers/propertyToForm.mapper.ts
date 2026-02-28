@@ -2,12 +2,18 @@
 // mappers/propertyToForm.mapper.ts
 import { PropertyResponse } from "@/dtos/property/property-response.dto";
 
+function normalizeOp(value: unknown): "venta" | "alquiler" {
+  if (value == null || value === "") return "venta";
+  const v = String(value).toLowerCase().trim();
+  return v === "alquiler" ? "alquiler" : "venta";
+}
+
 export function mapPropertyToForm(property: PropertyResponse): any {
   return {
     // Datos básicos
     title: property.title,
     slug: property.slug,
-    operationType: property.operationType === "alquiler" ? "alquiler" : "venta",
+    operationType: normalizeOp(property.operationType),
     propertyTypeSlug: property.propertyType?.slug || "casa",
     contactPhone: property.contactPhone || "", // 👈 Ahora recibe el dato del DTO correctamente
 

@@ -49,7 +49,11 @@ export class UpdatePropertyDTO {
   constructor(data: any) {
     this.title = data.title;
     this.slug = data.slug;
-    this.operationType = data.operationType;
+    // Normalizar solo cuando viene enviado (en update si no se envía, no se cambia)
+    if (data.operationType !== undefined && data.operationType !== "") {
+      const raw = String(data.operationType).toLowerCase();
+      this.operationType = raw === "alquiler" ? "alquiler" : "venta";
+    }
     this.propertyTypeSlug = data.propertyTypeSlug;
     this.description = data.description;
     this.contactPhone = data.contactPhone; // 👈 3. Mapeo de teléfono

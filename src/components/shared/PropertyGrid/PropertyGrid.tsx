@@ -22,6 +22,7 @@ export default function PropertyGrid({
 }: Props) {
   const scrollRef = useRef<HTMLDivElement>(null);
 
+
   const scroll = (direction: "left" | "right") => {
     if (scrollRef.current) {
       const { scrollLeft } = scrollRef.current;
